@@ -1,0 +1,44 @@
+#game-div {
+    padding-top: 2%;
+    padding-bottom: 2%;
+    width: 100%;
+    text-align: center;
+}
+
+.game-window {
+    margin: auto;
+    width: 50%;
+}
+
+.grid-col {
+    margin: 0 auto;
+    display: inline-block;
+}
+
+.sliding-area {
+    background-color: darkslategrey;
+}
+
+.play-area {
+    position: relative;
+    background-color:#f7f7f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tag {
+    position: absolute;
+
+}
+
+.img-tag {
+    position: absolute;
+    margin: 0;
+    /* max-width: 100px; */
+    
+}
+
+.slide-area {
+    background-color: darkgrey;
+}
