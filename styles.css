@@ -3,6 +3,8 @@
     padding-bottom: 2%;
     width: 100%;
     text-align: center;
+    height: 450px;
+    background-color: blue;
 }
 
 .game-window {
