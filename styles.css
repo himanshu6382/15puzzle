@@ -4,7 +4,7 @@
     width: 100%;
     text-align: center;
     height: 450px;
-    background-color: blue;
+    background-color:whitesmoke;
 }
 
 .game-window {
@@ -17,30 +17,30 @@
     display: inline-block;
 }
 
-.sliding-area {
-    background-color: darkslategrey;
-}
-
-.play-area {
-    position: relative;
-    background-color:#f7f7f7;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .tag {
     position: absolute;
+    margin: auto;
 
 }
 
 .img-tag {
     position: absolute;
     margin: 0;
-    /* max-width: 100px; */
-    
+    z-index: 1;
+
+}
+
+.play-area {
+    position: relative;
+    background-color:#dee2e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
 }
 
 .slide-area {
-    background-color: darkgrey;
+    background-color:grey;
+    opacity: 1;
 }
+
