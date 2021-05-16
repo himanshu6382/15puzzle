@@ -3,6 +3,10 @@ class UI {
         this.gameDiv = document.getElementById("game-div");        
     }
 
+    clearGrid() {
+        this.gameDiv.innerHTML = '';
+    }
+
     generateGrid(grid) {
         console.log("game generated");
         for (let i = 0; i < grid + 2; i++) {
