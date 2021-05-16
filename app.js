@@ -6,28 +6,20 @@ let tileMovTracker = [];
 let tile = 0;
 let gameCellSize = 360 / gridSize;
 createGameArray();
+scramble();
 ui.generateGrid(gridSize);
 
-function createGameArray() {
-    for (let i = 0; i < gridSize + 2; i++) {
-        gameArray[i] = new Array();
-        for (let j = 0; j < gridSize + 2; j++) {
-            if (i === 0 || i === gridSize + 1 || j === gridSize + 1 || (j === 0 && i !== 1)) {
-                gameArray[i].push('na');
-            } else {
-                gameArray[i].push(tile);
-                tile++
-            }
-        }
-    }
-}
+
+
+
 
 ui.gameDiv.addEventListener('click', function (e) {
     //check which tile is clicked
     if (parseInt(e.target.id)) {
+        console.log(gameArray);
         tileToMove = e.target.id;
         let tileIndex = getTileIndex(tileToMove);//get index of tileToMove in gameArray
-        // console.log(`tile index is: ${tileIndex}`);
+        console.log(`tile index is: ${tileIndex}`);
         //check in game array if there is an empty slot around it and assign dir accordingly
         let dir = getMoveDir(tileIndex);
         updateGameArray(tileToMove, tileIndex, dir);
@@ -54,6 +46,20 @@ function initiateGameVariables(){
     createGameArray();
     ui.clearGrid();
     ui.generateGrid(gridSize);
+}
+
+function createGameArray() {
+    for (let i = 0; i < gridSize + 2; i++) {
+        gameArray[i] = new Array();
+        for (let j = 0; j < gridSize + 2; j++) {
+            if (i === 0 || i === gridSize + 1 || j === gridSize + 1 || (j === 0 && i !== 1)) {
+                gameArray[i].push('na');
+            } else {
+                gameArray[i].push(tile);
+                tile++
+            }
+        }
+    }
 }
 
 function getTileIndex(value) {
@@ -101,4 +107,36 @@ function updateGameArray(element, index, dir) {
             gameArray[index[0]][index[1]] = 0;
             break;
     }
+}
+
+function scramble() {
+//create an array with values of 1 to the total numbers in the grid
+
+    let tempArray = [];
+    for (let i = 0; i<gridSize*gridSize; i++) {
+        tempArray.push(i+1);
+    }
+
+//randomly arrange the numbers in the above array
+//randomly select any index between 2 to the highest number. 
+//For e.g. say grid size is 3x3. So tiles will be from 1 to 9
+//loop from last tile to tile 2, exchanging with any randomly chosen tile(index) from tile 2 to 9.
+//remember 1st tile should always be 1. So don't include tempArray[0] in the loop
+
+    for (let i = gridSize*gridSize-1; i>0; i--) {
+        valToExchange = Math.floor(Math.random()*i+1);
+        let temp = tempArray[i];
+        tempArray[i] = tempArray[valToExchange];
+        tempArray[valToExchange] = temp;
+    }
+
+//assign the above randomized temparray to game array
+
+    for (let i = 1; i<= gridSize; i++) {
+        for (let j = 1; j<= gridSize; j++) {
+            let index = j + (i-1)*(gridSize);
+            gameArray[i][j] = tempArray[index-1];
+        }
+    }
+    console.log(gameArray);
 }

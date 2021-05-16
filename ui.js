@@ -35,7 +35,7 @@ class UI {
                     let gridImg = document.createElement("IMG");
                     gridImg.src = `images/${gameArray[j][i]}.png`;
                     gridImg.classList.add('img-tag');
-                    gridImg.setAttribute('id', `${(i) + grid * (j - 1)}`);
+                    gridImg.setAttribute('id', `${gameArray[j][i]}`);
                     gridImg.style.maxWidth = `${gameCellSize-5}px`;
                     gameCell.appendChild(gridImg);
                     tileMovTracker[gameArray[j][i]]=[0,0];
