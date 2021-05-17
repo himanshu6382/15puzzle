@@ -1,3 +1,16 @@
+.features {
+    height: 150px;
+    padding: 5%;
+}
+
+.coming-soon {
+    width: 90%;
+    height: 25%;
+    z-index: -1;
+    transform: rotate(-25deg);
+    transform-origin: 20% 20%;
+}
+
 #game-div {
     padding-top: 2%;
     padding-bottom: 2%;

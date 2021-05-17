@@ -82,3 +82,6 @@ function updateGameArray(element, index, dir) {
             break;
     }
 }
+
+//if using image, keep a selection button on top to revert to numbered tiles
+//also eliminate borders between tiles if playing with custom image
