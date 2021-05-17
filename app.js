@@ -9,17 +9,11 @@ createGameArray();
 scramble();
 ui.generateGrid(gridSize);
 
-
-
-
-
 ui.gameDiv.addEventListener('click', function (e) {
     //check which tile is clicked
     if (parseInt(e.target.id)) {
-        console.log(gameArray);
         tileToMove = e.target.id;
         let tileIndex = getTileIndex(tileToMove);//get index of tileToMove in gameArray
-        console.log(`tile index is: ${tileIndex}`);
         //check in game array if there is an empty slot around it and assign dir accordingly
         let dir = getMoveDir(tileIndex);
         updateGameArray(tileToMove, tileIndex, dir);
@@ -44,6 +38,7 @@ function initiateGameVariables(){
     gameCellSize = 360 / gridSize;
     tile = 0;
     createGameArray();
+    scramble();
     ui.clearGrid();
     ui.generateGrid(gridSize);
 }
@@ -121,6 +116,7 @@ function scramble() {
 //randomly select any index between 2 to the highest number. 
 //For e.g. say grid size is 3x3. So tiles will be from 1 to 9
 //loop from last tile to tile 2, exchanging with any randomly chosen tile(index) from tile 2 to 9.
+//first iteration: exchange tempArray[8] with tempArray [index between 2 and 9]. In 2nd iter, exchange tempArray[7], with something between 2 and 7
 //remember 1st tile should always be 1. So don't include tempArray[0] in the loop
 
     for (let i = gridSize*gridSize-1; i>0; i--) {
@@ -138,5 +134,4 @@ function scramble() {
             gameArray[i][j] = tempArray[index-1];
         }
     }
-    console.log(gameArray);
 }
