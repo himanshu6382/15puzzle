@@ -14,12 +14,12 @@
 </head>
 
 <body>
-    <div class="container-lg">
+    <!-- <div class="container-lg">
         <div class="col-12 text-center">
             <h1 class="blog-header-logo text-dark">Slider Game</h1>
         </div>
-    </div>
-    <div class="container-lg border bg-light">
+    </div> -->
+    <div class="container-sm border bg-light">
         <div class="row">
             <h4 class="text-center m-auto p-2">Pick a Grid Size</h4>
         </div>
@@ -40,7 +40,7 @@
         </div>
         <div class="row p-2">
             <input type="button" name="game-init" id="game-init" class="btn btn-primary m-auto"
-                value="Start and Scramble">
+                value="Start New Game">
         </div>
     </form>
 
@@ -53,7 +53,9 @@
 
 
             <div class="col-sm-3">
-                <div class="row border features"><p>Moves</p></div>
+                <div class="row border features">
+                    <div id="moves"><p>Moves: 0<br></p></div>
+                </div>
                 <div class="row border features">
                     <p>Moves to beat</p>
                     <img class="coming-soon" src="images/coming-soon.png" alt="" srcset="">
@@ -63,6 +65,12 @@
                     <img class="coming-soon" src="images/coming-soon.png" alt="" srcset="">
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="container-lg">
+        <div class="col-12 text-center">
+            <p>Click on a tile, or use arrow keys on keyboard, to slide a tile to an empty slot</p>
         </div>
     </div>
 

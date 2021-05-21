@@ -1,6 +1,7 @@
 .features {
     height: 150px;
     padding: 5%;
+    /* margin: auto; */
 }
 
 .coming-soon {
@@ -9,6 +10,18 @@
     z-index: -1;
     transform: rotate(-25deg);
     transform-origin: 20% 20%;
+}
+
+#moves {
+    width: 100%;
+}
+
+.status-message {
+    border-color: black;
+    border-style: double;
+    padding: 5px 5px;
+    height: 60%;
+    /* margin: auto; */
 }
 
 #game-div {
