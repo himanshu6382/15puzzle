@@ -38,7 +38,7 @@ class UI {
                             gridImg.classList.add('img-tag');
                             gridImg.setAttribute('id', `${gameArray[j][i]}`);
                         }
-                        gridImg.style.maxWidth = `${gameCellSize - 5}px`;
+                        gridImg.style.maxWidth = `${gameCellSize-8}px`;
                         gameCell.appendChild(gridImg);
                     }
                     tileMovTracker[gameArray[j][i]] = {
@@ -79,27 +79,27 @@ class UI {
 
     statusMessage(message) {
         let statusDiv = document.getElementsByClassName('features')[0];
-        let divToInsert = document.createElement('div');
-        divToInsert.classList.add('status-message');
+        let divToInsert = document.createElement('span');
         switch (message) {
             case 'freeplay':
+                divToInsert.classList.add('d-block', 'w-100', 'p-2', 'border', 'border-warning', 'text-center');
                 divToInsert.innerHTML = `
-                <p>Click on "Start New Game" for a new game</p>`;
+                Click on "Start New Game" for a new game`;
                 statusDiv.appendChild(divToInsert);
                 break;
             case 'ignore':
                 if (statusDiv.children[1]) this.statusMessageHide();
-                divToInsert.style.backgroundColor = 'teal';
-                divToInsert.style.color = 'white';
+                divToInsert.classList.add('d-block', 'w-100', 'p-2', 'border', 'border-warning', 'text-center');
                 divToInsert.innerHTML = `
-                <p>Clicked tile cannot be moved</p>`;
+                Clicked tile cannot be moved`;
                 statusDiv.appendChild(divToInsert);
                 setTimeout(this.statusMessageHide, 2000);
                 break;
             case 'win':
                 if (statusDiv.children[1]) this.statusMessageHide();
+                divToInsert.classList.add('d-block', 'w-100', 'p-2', 'bg-success', 'text-white', 'text-center');
                 divToInsert.innerHTML = `
-                <p>Game won in ${moves} moves. Click on "Start New Game" for a new game</p>`;
+                Game won in ${moves} moves. Click on "Start New Game" for a new game`;
                 statusDiv.children[0].innerHTML = `Moves: ${moves}`;
                 statusDiv.appendChild(divToInsert);
                 break;

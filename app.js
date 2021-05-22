@@ -94,7 +94,6 @@ function createGameArray() {
         }
     }
     gameArray[gridSize+1][gridSize] = 0;
-    // console.log(gameArray);
 }
 
 function getTileIndex(value, game) {
