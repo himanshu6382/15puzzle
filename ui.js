@@ -38,7 +38,6 @@ class UI {
                             gridImg.classList.add('img-tag');
                             gridImg.setAttribute('id', `${gameArray[j][i]}`);
                         }
-
                         gridImg.style.maxWidth = `${gameCellSize - 5}px`;
                         gameCell.appendChild(gridImg);
                     }

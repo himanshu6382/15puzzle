@@ -15,6 +15,7 @@ ui.gameDiv.addEventListener('click', function (e) {
     if (parseInt(e.target.id)) {
         let tileToMove = e.target.id;
         let tileIndex = getTileIndex(parseInt(tileToMove), gameArray);//get index of tileToMove in gameArray
+        console.log(tileIndex);
         //check in game array if there is an empty slot around it and assign dir accordingly
         let dir = getMoveDir(tileIndex);
         updateGameArray(tileIndex, dir);
@@ -93,12 +94,12 @@ function createGameArray() {
         }
     }
     gameArray[gridSize+1][gridSize] = 0;
-    console.log(gameArray);
+    // console.log(gameArray);
 }
 
 function getTileIndex(value, game) {
     let row, col;
-    for (row = 1; row < gridSize + 1; row++) {
+    for (row = 1; row <= gridSize + 1; row++) {
         col = game[row].indexOf(value);
         if (col !== -1) {
             return ([row, col]);
@@ -109,9 +110,7 @@ function getTileIndex(value, game) {
 function getMoveDir(tileIndex) {
 
     // console.log(gameArray[tileIndex[0]+1][tileIndex[1]])
-    if (tileIndex[0] === 1 && tileIndex[1] === 0 && gameArray[1][1] === 0) {
-        return 'right';
-    } else if (gameArray[tileIndex[0] - 1][tileIndex[1]] === 0) {
+   if (gameArray[tileIndex[0] - 1][tileIndex[1]] === 0) {
         return 'up'
     } else if ((gameArray[tileIndex[0] + 1][tileIndex[1]] === 0)) {
         return 'down'
@@ -160,9 +159,9 @@ function scramble() {
 //The puzzle will be solvable only for even parity - i.e. if number of swaps are even in number. So check for parity. If it is even swap tempArray[1] and tempArray[2]
 //remember 1st tile should always be 1. So don't include tempArray[0] in the loop
 
-    for (let i = gridSize*gridSize-1; i>1; i--) {
-        if (i>2) {
-            valToExchange = Math.floor(Math.random()*i+1);
+    for (let i = gridSize*gridSize-2; i>=0; i--) {
+        if (i>1) {
+            valToExchange = Math.ceil(Math.random()*i-1);
             let temp = tempArray[i];
             tempArray[i] = tempArray[valToExchange];
             tempArray[valToExchange] = temp;
@@ -211,10 +210,10 @@ function gameScore() {
 function scrambleTest() {
     gridSize = 3;
     gameArray[0] = ['na', 'na', 'na', 'na', 'na'];
-    gameArray[1] = [0, 1, 5, 3, 'na'];
-    gameArray[2] = ['na', 2, 4, 6, 'na'];
-    gameArray[3] = ['na', 7, 8, 9, 'na'];
-    gameArray[4] = ['na', 'na', 'na', 'na', 'na'];
+    gameArray[1] = ['na', 1, 2, 3, 'na'];
+    gameArray[2] = ['na', 4, 6, 8, 'na'];
+    gameArray[3] = ['na', 7, 5, 9, 'na'];
+    gameArray[4] = ['na', 'na', 'na', 0, 'na'];
 }
 
 // function scrambleTest() {
@@ -244,7 +243,7 @@ function tileToMoveOnKeyPress(key) {
             }
             break;
         case 'ArrowUp':
-            if (gameArray[emptyIndex[0]+1][emptyIndex[1]] != 'na') {
+            if (emptyIndex[0] <= gridSize && gameArray[emptyIndex[0]+1][emptyIndex[1]] !== 'na') {
                 dirToMove = 'up';
                 tileToMove = [emptyIndex[0]+1, emptyIndex[1]]
             }
