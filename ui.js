@@ -1,43 +1,48 @@
 class UI {
     constructor() {
-        this.gameDiv = document.getElementById("game-div");        
+        this.gameDiv = document.getElementById("game-div");
     }
 
     clearGrid() {
         this.gameDiv.innerHTML = '';
     }
 
-    generateGrid(grid) {
-        for (let i = 0; i < grid + 2; i++) {
+    generateGrid() {
+        for (let i = 0; i < gridSize + 2; i++) {
             let gridColDiv = document.createElement("div");
             gridColDiv.classList.add('grid-col');
             this.gameDiv.appendChild(gridColDiv);
-            for (let j = 0; j < grid + 1; j++) {
+            for (let j = 0; j < gridSize + 2; j++) {
                 let gridCellDiv = document.createElement('div');
                 gridCellDiv.classList.add('border', 'play-area');
-                i === grid + 1 ? gridCellDiv.style.width = `30px` : gridCellDiv.style.width = `${gameCellSize}px`;
+                (i === 0 || i === gridSize + 1) ? gridCellDiv.style.width = `30px` : gridCellDiv.style.width = `${gameCellSize}px`;
                 j === 0 ? gridCellDiv.style.height = `30px` : gridCellDiv.style.height = `${gameCellSize}px`;
                 this.gameDiv.children[i].appendChild(gridCellDiv);
                 if (j === 0) {
-                    if (i !== 0 && i !== grid + 1) {
+                    if (i !== 0 && i !== gridSize + 1) {
                         this.gameDiv.children[i].children[0].innerHTML = `<p class='tag'>C${i}</p>`;
                     }
                 }
-                if (i === grid + 1) {
-                    if (j !== 0) this.gameDiv.children[grid + 1].children[j].innerHTML = `<p class='tag'>R${j}</p>`;
+                if (i === 0) {
+                    if (j !== 0) this.gameDiv.children[i].children[j].innerHTML = `<p class='tag'>R${j}</p>`;
                 }
-                if ((i === 0 && j === 1) || (i > 0 && i < grid + 1 && j > 0)) {
+                if ((i > 0 && i < gridSize + 1 && j > 0 && j<gridSize+1) || (j===gridSize+1 && i === gridSize)) {
                     gridCellDiv.classList.add('slide-area');
                 }
-                if (i > 0 && j > 0 && i < grid + 1) {
+                if (i > 0 && j > 0 && i < gridSize + 1) {
                     let gameCell = this.gameDiv.children[i].children[j];
-                    let gridImg = document.createElement("IMG");
-                    gridImg.src = `images/${gameArray[j][i]}.png`;
-                    gridImg.classList.add('img-tag');
-                    gridImg.setAttribute('id', `${gameArray[j][i]}`);
-                    gridImg.style.maxWidth = `${gameCellSize-5}px`;
-                    gameCell.appendChild(gridImg);
-                    tileMovTracker[gameArray[j][i]]={
+                    if (j < gridSize + 1) {
+                        let gridImg = document.createElement("IMG");
+                        gridImg.src = `images/${gameArray[j][i]}.png`;
+                        if (!(j === gridSize + 1 && i === gridSize)) {
+                            gridImg.classList.add('img-tag');
+                            gridImg.setAttribute('id', `${gameArray[j][i]}`);
+                        }
+
+                        gridImg.style.maxWidth = `${gameCellSize - 5}px`;
+                        gameCell.appendChild(gridImg);
+                    }
+                    tileMovTracker[gameArray[j][i]] = {
                         xAxis: 0,
                         yAxis: 0
                     };
@@ -56,28 +61,28 @@ class UI {
 
     moveTile(tileToMove, dir) {
         let tile = document.getElementById(tileToMove);
-        switch(dir) {
+        switch (dir) {
             case 'left':
-                tileMovTracker[tileToMove].xAxis-=1;
+                tileMovTracker[tileToMove].xAxis -= 1;
                 break;
             case 'right':
-                tileMovTracker[tileToMove].xAxis+=1;
+                tileMovTracker[tileToMove].xAxis += 1;
                 break;
             case 'up':
-                tileMovTracker[tileToMove].yAxis-=1;
+                tileMovTracker[tileToMove].yAxis -= 1;
                 break;
             case 'down':
-                tileMovTracker[tileToMove].yAxis+=1;
+                tileMovTracker[tileToMove].yAxis += 1;
                 break;
         }
-        tile.style.transform = `translate(${tileMovTracker[tileToMove].xAxis*gameCellSize}px,${tileMovTracker[tileToMove].yAxis*gameCellSize}px)`;
+        tile.style.transform = `translate(${tileMovTracker[tileToMove].xAxis * gameCellSize}px,${tileMovTracker[tileToMove].yAxis * gameCellSize}px)`;
     }
 
     statusMessage(message) {
         let statusDiv = document.getElementsByClassName('features')[0];
         let divToInsert = document.createElement('div');
         divToInsert.classList.add('status-message');
-        switch(message) {
+        switch (message) {
             case 'freeplay':
                 divToInsert.innerHTML = `
                 <p>Click on "Start New Game" for a new game</p>`;
@@ -109,4 +114,4 @@ class UI {
         let statusMessage = document.getElementsByClassName('features')[0].children[1];
         if (statusMessage) statusMessage.parentNode.removeChild(statusMessage);
     }
-}  
+}

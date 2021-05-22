@@ -1,5 +1,5 @@
 .features {
-    height: 150px;
+    height: 33.33%;
     padding: 5%;
     /* margin: auto; */
 }
@@ -29,13 +29,13 @@
     padding-bottom: 2%;
     width: 100%;
     text-align: center;
-    height: 450px;
+    /* max-height: 510px; */
     background-color:whitesmoke;
 }
 
 .game-window {
     margin: auto;
-    width: 50%;
+    /* width: 50%; */
 }
 
 .grid-col {
@@ -46,7 +46,6 @@
 .tag {
     position: absolute;
     margin: auto;
-
 }
 
 .img-tag {
@@ -57,7 +56,7 @@
 }
 
 .play-area {
-    position: relative;
+    /* position: relative; */
     background-color:#dee2e6;
     display: flex;
     align-items: center;

@@ -3,11 +3,11 @@ let gridSize = 3;
 const ui = new UI;
 let gameArray = [];
 const tileMovTracker = [];
-let tile = 0;
-let gameCellSize = 360 / gridSize;
+//let tile = 0;
+let gameCellSize = 260 / (gridSize);
 let moves = 0;
 createGameArray();
-ui.generateGrid(gridSize);
+ui.generateGrid();
 ui.statusMessage('freeplay');
 
 ui.gameDiv.addEventListener('click', function (e) {
@@ -66,7 +66,7 @@ document.addEventListener('keyup', (e) => {
 });
 
 function initiateGame(){
-    gameCellSize = 360 / gridSize;
+    gameCellSize = 260 / gridSize;
     moves = 0;
     tile = 0;
     gameState = 1;
@@ -85,14 +85,15 @@ function createGameArray() {
     for (let i = 0; i < gridSize + 2; i++) {
         gameArray[i] = new Array();
         for (let j = 0; j < gridSize + 2; j++) {
-            if (i === 0 || i === gridSize + 1 || j === gridSize + 1 || (j === 0 && i !== 1)) {
+            if ((i === 0 || i === gridSize + 1 && j !== gridSize+1) || (j === 0 || j === gridSize+1)) {
                 gameArray[i].push('na');
             } else {
-                gameArray[i].push(tile);
-                tile++
+                gameArray[i].push(j+(i-1)*gridSize);
             }
         }
     }
+    gameArray[gridSize+1][gridSize] = 0;
+    console.log(gameArray);
 }
 
 function getTileIndex(value, game) {
