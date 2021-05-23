@@ -89,11 +89,15 @@ class UI {
                 break;
             case 'ignore':
                 if (statusDiv.children[1]) this.statusMessageHide();
-                divToInsert.classList.add('d-block', 'w-100', 'p-2', 'border', 'border-warning', 'text-center');
+                divToInsert.classList.add('d-block', 'w-100', 'p-2', 'border', 'text-white', 'bg-danger', 'text-center');
                 divToInsert.innerHTML = `
                 Clicked tile cannot be moved`;
                 statusDiv.appendChild(divToInsert);
-                setTimeout(this.statusMessageHide, 2000);
+                setTimeout(() => { //this has to be an arrow function for 'this' to point to ui object
+                    this.statusMessageHide;
+                    if (moves === 0) this.statusMessage('first move prompt'); 
+                    }, 2000);
+                
                 break;
             case 'win':
                 if (statusDiv.children[1]) this.statusMessageHide();
@@ -101,6 +105,13 @@ class UI {
                 divToInsert.innerHTML = `
                 Game won in ${moves} moves. Click on "Start New Game" for a new game`;
                 statusDiv.children[0].innerHTML = `Moves: ${moves}`;
+                statusDiv.appendChild(divToInsert);
+                break;
+            case 'first move prompt':
+                if (statusDiv.children[1]) this.statusMessageHide();
+                divToInsert.classList.add('d-block', 'w-100', 'p-2', 'border', 'border-warning', 'text-center');
+                divToInsert.innerHTML = `
+                Click on tile number ${gridSize*gridSize} to move it to the empty slot`;
                 statusDiv.appendChild(divToInsert);
                 break;
             default:

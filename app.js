@@ -3,7 +3,6 @@ let gridSize = 3;
 const ui = new UI;
 let gameArray = [];
 const tileMovTracker = [];
-//let tile = 0;
 let gameCellSize = 260 / (gridSize);
 let moves = 0;
 createGameArray();
@@ -15,7 +14,6 @@ ui.gameDiv.addEventListener('click', function (e) {
     if (parseInt(e.target.id)) {
         let tileToMove = e.target.id;
         let tileIndex = getTileIndex(parseInt(tileToMove), gameArray);//get index of tileToMove in gameArray
-        console.log(tileIndex);
         //check in game array if there is an empty slot around it and assign dir accordingly
         let dir = getMoveDir(tileIndex);
         updateGameArray(tileIndex, dir);
@@ -44,6 +42,7 @@ document.getElementById('game-init').addEventListener('click', function (e) {
         if (option.checked) gridSize = parseInt(option.value);
     }
     initiateGame();
+    ui.statusMessage('first move prompt');
 });
 
 document.addEventListener('keyup', (e) => {
@@ -77,9 +76,7 @@ function initiateGame(){
     console.log(`Game score is ${gameScore()}`)
     ui.clearGrid();
     ui.generateGrid(gridSize);
-    ui.statusMessage();
-    
-    
+    ui.statusMessage();    
 }
 
 function createGameArray() {
